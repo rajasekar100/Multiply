@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiply</title>
+    <style>
+        body{
+            align-items: center;
+            background-color:#EBF7E3;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            width:500px;
+        }
+        .form{
+            background-color:#9BD770;
+            border-radius: 20px;
+            box-shadow: 0px 0px 30px black;
+            display: flex;
+            flex-direction: column;
+            letter-spacing: 1px;
+            padding: 30px;
+            position: relative;
+        }
+        #qus,#box,#score{
+            margin-bottom: 15px;
+            margin: 5px;
+            padding: 5px;
+        }
+        #score{
+            font-size: large;
+            margin: 10px;
+            padding: 0px;
+            position: absolute;
+            right: 20px;
+            top: 0px;
+        }
+        #qus{
+            font-size: 25px;
+            font-weight: bold;
+           
+        }
+        #box{
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0px 1px 3px black;
+            font-family: serif;
+            font-size: 20px;
+            font-weight: bolder;
+            height: 30px;
+            letter-spacing: 3px;
+            text-align: center;
+
+        }
+        #box:focus{
+            box-shadow: 0px 1px 8px black;
+            outline: none;
+        }
+        #box::placeholder{
+            font-family: serif;
+            font-size: 15px;
+            font-weight: lighter;
+            letter-spacing: 1px;
+            opacity: 0.4;
+            text-align: center; 
+        }
+      .btn{
+            background-color:#375F1B;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0px 1px 20px white;   
+            color: white;
+            font-family: serif;
+            font-size: 18px;
+            font-weight: lighter;
+            height: 40px;
+            letter-spacing: 1px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            width:200px;
+        }
+        .btn:hover{
+             box-shadow: 5px 5px 40px; 
+        }
+      </style>
+</head>
+<body>
+    
+    <form id="form1" class="form">
+        <h2 id="score">Score:0</h2>
+        <label id="qus">Which is 3 multiply by 5 ?</label>
+        <input type="text" id="box" class="box" placeholder="ENTER YOUR ANSWER" autofocus autocomplete="off">
+        
+            <input type="submit" class="btn" >
+            
+   
+        </form>
+        <script>
+            const n1=Math.ceil(Math.random()*10);
+            const n2=Math.ceil(Math.random()*10);
+            const quest=document.getElementById("qus");
+             const inpEm=document.getElementById("box");
+            const formEm=document.getElementById("form1");
+            const scoreEl=document.getElementById("score");
+            quest.innerText=`Which is ${n1} multiply by ${n2}?`;
+            const crtAns=n1*n2;
+            let score=JSON.parse(localStorage.getItem("score"));
+            if(!score){score=0;}
+            
+
+            formEm.addEventListener("submit",()=>{
+                const userAns = +inpEm.value;
+                    if(crtAns === userAns){
+                        score++;
+                        updateLocalStorage()
+                    }
+                    else{
+                        score--;
+                       updateLocalStorage()
+                    }
+            });
+            scoreEl.innerText = `Score ${score}`;
+            function updateLocalStorage()
+            {
+                localStorage.setItem("score",JSON.stringify(score));
+            }
+            
+            
+            
+        </script>
+
+</body>
+</html>
